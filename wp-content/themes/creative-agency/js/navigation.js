@@ -104,3 +104,7 @@
 		}
 	}( container ) );
 } )();
+
+window.onload = function() {
+	document.getElementsByClassName('menu-item-has-children')[0].className += ' has-dropdown';
+}

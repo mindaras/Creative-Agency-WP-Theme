@@ -43,9 +43,10 @@ if ( ! function_exists( 'creative_agency_setup' ) ) :
 		add_theme_support( 'post-thumbnails' );
 
 		// This theme uses wp_nav_menu() in one location.
-		register_nav_menus( array(
-			'menu-1' => esc_html__( 'Primary', 'creative-agency' ),
-		) );
+		register_nav_menus(array(
+			'header' => esc_html__('Header Menu', 'creative-agency'),
+			'footer' => esc_html__('Footer Menu', 'creative-agency')
+		));
 
 		/*
 		 * Switch default core markup for search form, comment form, and comments
@@ -156,3 +157,45 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+/* Changing Menu Structure */
+class Custom_Walker_Nav_Menu extends Walker_Nav_Menu {
+	public function start_lvl( &$output, $depth = 0, $args = array() ) {
+		if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
+			$t = '';
+			$n = '';
+		} else {
+			$t = "\t";
+			$n = "\n";
+		}
+		$indent = str_repeat( $t, $depth );
+
+		// Default class.
+		$classes = array( 'dropdown' );
+
+		/**
+		 * Filters the CSS class(es) applied to a menu list element.
+		 *
+		 * @since 4.8.0
+		 *
+		 * @param array    $classes The CSS classes that are applied to the menu `<ul>` element.
+		 * @param stdClass $args    An object of `wp_nav_menu()` arguments.
+		 * @param int      $depth   Depth of menu item. Used for padding.
+		 */
+		$class_names = join( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
+		$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
+
+		$output .= "{$n}{$indent}<ul$class_names>{$n}";
+	}
+
+	public function end_lvl( &$output, $depth = 0, $args = array() ) {
+		if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
+			$t = '';
+			$n = '';
+		} else {
+			$t = "\t";
+			$n = "\n";
+		}
+		$indent = str_repeat( $t, $depth );
+		$output .= "$indent</ul>{$n}";
+	}
+}

@@ -4,5 +4,6 @@
 <?php get_template_part('content', 'about'); ?>
 <?php get_template_part('content', 'portfolio'); ?>
 <?php get_template_part('content', 'service'); ?>
+<?php get_template_part('content', 'features'); ?>
 
 <?php include 'footer.php'; ?>

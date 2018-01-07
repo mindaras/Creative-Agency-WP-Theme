@@ -19,7 +19,8 @@
 
         <?php
         $query = new WP_Query(array(
-          'post_type' => 'about_post_type'
+          'post_type' => 'about_post_type',
+          'order' => 'ASC'
         ));
 
         if ($query->have_posts()):
@@ -32,7 +33,7 @@
 					<div class="about">
 						<i class="fa fa-cogs"></i>
 						<h3><?php the_title(); ?></h3>
-						<p><?php the_content(); ?></p>
+						<p><?php echo get_the_content(); ?></p>
             <?php
               $ab_button_text = get_field('ab_button_text');
               $ab_button_link = get_field('ab_button_link');

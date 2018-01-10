@@ -5,5 +5,6 @@
 <?php get_template_part('content', 'portfolio'); ?>
 <?php get_template_part('content', 'service'); ?>
 <?php get_template_part('content', 'features'); ?>
+<?php get_template_part('content', 'numbers'); ?>
 
 <?php include 'footer.php'; ?>

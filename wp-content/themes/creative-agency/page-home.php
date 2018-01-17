@@ -6,5 +6,6 @@
 <?php get_template_part('content', 'service'); ?>
 <?php get_template_part('content', 'features'); ?>
 <?php get_template_part('content', 'numbers'); ?>
+<?php get_template_part('content', 'pricing'); ?>
 
 <?php include 'footer.php'; ?>

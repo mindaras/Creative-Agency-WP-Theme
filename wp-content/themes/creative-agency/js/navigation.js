@@ -107,4 +107,8 @@
 
 window.onload = function() {
 	document.getElementsByClassName('menu-item-has-children')[0].className += ' has-dropdown';
+	var pricingUls = document.querySelectorAll('#pricing ul');
+	pricingUls.forEach(function(el) {
+		el.className = 'price-content';
+	});
 }

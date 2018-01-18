@@ -8,5 +8,6 @@
 <?php get_template_part('content', 'numbers'); ?>
 <?php get_template_part('content', 'pricing'); ?>
 <?php get_template_part('content', 'testimonial'); ?>
+<?php get_template_part('content', 'team'); ?>
 
 <?php include 'footer.php'; ?>

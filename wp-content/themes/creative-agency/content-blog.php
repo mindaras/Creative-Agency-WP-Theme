@@ -25,7 +25,10 @@
       <div class="col-md-4">
         <div class="blog">
           <div class="blog-img">
-            <img class="img-responsive" src="./img/blog1.jpg" alt="">
+            <?php
+              $image_alt  = get_post_meta(get_post_thumbnail_id($post->ID), '_wp_attachment_image_alt', true);
+            ?>
+            <img class="img-responsive" src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php echo $image_alt; ?>">
           </div>
           <div class="blog-content">
             <ul class="blog-meta">
@@ -34,7 +37,7 @@
               <li><i class="fa fa-comments"></i><?php echo get_comments_number(0, 1, '%') ?></li>
             </ul>
             <h3><?php the_title(); ?></h3>
-            <p><?php echo get_the_content(); ?></p>
+            <p><?php the_excerpt(); ?></p>
             <a href="<?php the_permalink(); ?>">Read more</a>
           </div>
         </div>

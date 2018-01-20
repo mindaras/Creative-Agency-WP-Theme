@@ -80,6 +80,22 @@ if ( ! function_exists( 'creative_agency_setup' ) ) :
 			'flex-width'  => true,
 			'flex-height' => true,
 		) );
+
+		function custom_excerpt_length($length) {
+			return 20;
+		}
+		add_filter('excerpt_length', 'custom_excerpt_length', 999);
+
+		function new_excerpt_more($more) {
+			return '';
+		}
+		add_filter('excerpt_more', 'new_excerpt_more');
+
+		add_filter('wpcf7_form_elements', function($content) {
+		    $content = preg_replace('/<(span).*?class="\s*(?:.*\s)?wpcf7-form-control-wrap(?:\s[^"]+)?\s*"[^\>]*>(.*)<\/\1>/i', '\2', $content);
+
+		    return $content;
+		});
 	}
 endif;
 add_action( 'after_setup_theme', 'creative_agency_setup' );

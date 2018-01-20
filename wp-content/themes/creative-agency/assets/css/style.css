@@ -1436,11 +1436,11 @@ header {
 }
 
 
-.contact-form .input:nth-child(1), .contact-form .input:nth-child(2) {
+.contact-form .input:nth-child(2), .contact-form .input:nth-child(3) {
     width: calc(50% - 10px);
 }
 
-.contact-form .input:nth-child(2) {
+.contact-form .input:nth-child(3) {
     margin-left: 15px;
 }
 

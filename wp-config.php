@@ -79,6 +79,7 @@ $table_prefix  = 'wp_';
  */
 define('WP_DEBUG', false);
 define('FS_METHOD', 'direct');
+define('WPCF7_AUTOP', false);
 
 /* That's all, stop editing! Happy blogging. */
 

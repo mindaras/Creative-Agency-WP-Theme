@@ -10,5 +10,6 @@
 <?php get_template_part('content', 'testimonial'); ?>
 <?php get_template_part('content', 'team'); ?>
 <?php get_template_part('content', 'blog'); ?>
+<?php get_template_part('content', 'contact'); ?>
 
 <?php include 'footer.php'; ?>

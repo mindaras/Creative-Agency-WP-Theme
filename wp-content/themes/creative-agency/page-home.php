@@ -9,5 +9,6 @@
 <?php get_template_part('content', 'pricing'); ?>
 <?php get_template_part('content', 'testimonial'); ?>
 <?php get_template_part('content', 'team'); ?>
+<?php get_template_part('content', 'blog'); ?>
 
 <?php include 'footer.php'; ?>

@@ -9,42 +9,77 @@
 
 ?>
 
-<section class="no-results not-found">
-	<header class="page-header">
-		<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'creative-agency' ); ?></h1>
-	</header><!-- .page-header -->
+<!-- Blog -->
+<div id="blog" class="section md-padding">
 
-	<div class="page-content">
-		<?php
-		if ( is_home() && current_user_can( 'publish_posts' ) ) : ?>
+	<!-- Container -->
+	<div class="container">
 
-			<p><?php
-				printf(
-					wp_kses(
-						/* translators: 1: link to WP admin new post page. */
-						__( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'creative-agency' ),
-						array(
-							'a' => array(
-								'href' => array(),
-							),
-						)
-					),
-					esc_url( admin_url( 'post-new.php' ) )
-				);
-			?></p>
+		<!-- Row -->
+		<div class="row">
 
-		<?php elseif ( is_search() ) : ?>
+			<!-- Main -->
+			<main id="main" class="col-md-9">
+				<div class="blog">
+					<div class="blog-img">
+						<?php
+							$image_alt = get_post_meta(get_post_thumbnail_id($post->ID), '_wp_attachment_image_alt', true);
+						?>
+						<img class="img-responsive" src="<?php get_the_post_thumbnail_url($post->ID); ?>" alt="<?php echo $image_alt; ?>">
+					</div>
+					<div class="blog-content">
+						<ul class="blog-meta">
+							<li><i class="fa fa-user"></i><?php the_author(); ?></li>
+							<li><i class="fa fa-clock-o"></i><?php the_date('j M'); ?></li>
+							<li><i class="fa fa-comments"></i><?php get_comments_number(0, 1, '%'); ?></li>
+						</ul>
+						<h3><?php the_title(); ?></h3>
+						<p><?php echo get_the_content(); ?></p>
+					</div>
 
-			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'creative-agency' ); ?></p>
-			<?php
-				get_search_form();
+					<!-- blog tags -->
+					<div class="blog-tags">
+						<h5>Tags :</h5>
+						<a href="#"><i class="fa fa-tag"></i>Web</a>
+						<a href="#"><i class="fa fa-tag"></i>Design</a>
+						<a href="#"><i class="fa fa-tag"></i>Marketing</a>
+						<a href="#"><i class="fa fa-tag"></i>Development</a>
+						<a href="#"><i class="fa fa-tag"></i>Branding</a>
+						<a href="#"><i class="fa fa-tag"></i>Photography</a>
+					</div>
+					<!-- blog tags -->
 
-		else : ?>
+					<!-- blog author -->
+					<div class="blog-author">
+						<div class="media">
+							<div class="media-left">
+								<img class="media-object" src="./img/author.jpg" alt="">
+							</div>
+							<div class="media-body">
+								<div class="media-heading">
+									<h3>Joe Doe</h3>
+									<div class="author-social">
+										<a href="#"><i class="fa fa-facebook"></i></a>
+										<a href="#"><i class="fa fa-twitter"></i></a>
+										<a href="#"><i class="fa fa-google-plus"></i></a>
+										<a href="#"><i class="fa fa-instagram"></i></a>
+									</div>
+								</div>
+								<p>Nec feugiat nisl pretium fusce id velit ut tortor pretium. Nisl purus in mollis nunc sed. Nunc non blandit massa enim nec.</p>
+							</div>
+						</div>
+					</div>
+					<!-- /blog author -->
 
-			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'creative-agency' ); ?></p>
-			<?php
-				get_search_form();
+				</div>
+			</main>
+			<!-- /Main -->
 
-		endif; ?>
-	</div><!-- .page-content -->
-</section><!-- .no-results -->
+		</div>
+		<!-- /Row -->
+
+	</div>
+	<!-- /Container -->
+
+</div>
+<!-- /Blog -->

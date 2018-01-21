@@ -20,53 +20,58 @@ if ( post_password_required() ) {
 }
 ?>
 
-<div id="comments" class="comments-area">
+<!-- blog comments -->
+<div class="blog-comments">
+	<h3 class="title">(<?php echo get_comments_number(0, 1, '%'); ?>) Comments</h3>
+
+<?php
+	$comments = get_comments(array(
+		'post_id' => $post->ID
+	));
+
+	if ($comments):
+		foreach ($comments as $comment):
+?>
+
+<?php
+	$comment_id = get_comment_ID();
+	$author = get_comment_author($commend_id);
+	$author_id = get_the_author_meta('ID');
+	$avatar_url = get_avatar_url($author_id);
+	$comment_text = get_comment_text($comment_id);
+	$comment_reply_link = get_comment_reply_link();
+?>
+	<!-- comment -->
+	<div class="media">
+		<div class="media-left">
+			<img class="media-object" src="<?php echo $avatar_url; ?>" alt="Avatar">
+		</div>
+		<div class="media-body">
+			<h4 class="media-heading"
+			><?php echo $author; ?><span class="time"><?php printf( _x( '%s ago', '%s = human-readable time difference'), human_time_diff( get_comment_time( 'U' ), current_time( 'timestamp' ) ) ); ?></span></h4>
+			<p><?php echo $comment_text; ?></p>
+		</div>
+	</div>
+	<!-- /comment -->
 
 	<?php
-	// You can start editing here -- including this comment!
-	if ( have_comments() ) : ?>
-		<h2 class="comments-title">
-			<?php
-			$comment_count = get_comments_number();
-			if ( 1 === $comment_count ) {
-				printf(
-					/* translators: 1: title. */
-					esc_html_e( 'One thought on &ldquo;%1$s&rdquo;', 'creative-agency' ),
-					'<span>' . get_the_title() . '</span>'
-				);
-			} else {
-				printf( // WPCS: XSS OK.
-					/* translators: 1: comment count number, 2: title. */
-					esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $comment_count, 'comments title', 'creative-agency' ) ),
-					number_format_i18n( $comment_count ),
-					'<span>' . get_the_title() . '</span>'
-				);
-			}
-			?>
-		</h2><!-- .comments-title -->
-
-		<?php the_comments_navigation(); ?>
-
-		<ol class="comment-list">
-			<?php
-				wp_list_comments( array(
-					'style'      => 'ol',
-					'short_ping' => true,
-				) );
-			?>
-		</ol><!-- .comment-list -->
-
-		<?php the_comments_navigation();
-
-		// If comments are closed and there are comments, let's leave a little note, shall we?
-		if ( ! comments_open() ) : ?>
-			<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'creative-agency' ); ?></p>
-		<?php
+			endforeach;
 		endif;
-
-	endif; // Check for have_comments().
-
-	comment_form();
 	?>
 
-</div><!-- #comments -->
+</div>
+<!-- /blog comments -->
+
+<!-- reply form -->
+<div class="reply-form">
+	<h3 class="title">Leave a reply</h3>
+	<?php
+		comment_form(array(
+			'class_submit' => 'main-btn',
+			'comment_notes_before' => '',
+			'title_reply' => '',
+			'label_submit' => 'Submit',
+		));
+	?>
+</div>
+<!-- /reply form -->

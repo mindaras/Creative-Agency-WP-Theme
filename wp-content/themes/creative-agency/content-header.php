@@ -9,7 +9,7 @@
 	$button_2_link = get_field('button_2_link');
 ?>
 <!-- Header -->
-	<header id="home">
+	<header  <?php echo !is_single() ? 'id="home"' : ''; ?>>
 		<!-- Background Image -->
 		<div class="bg-img" style="background-image: url('<?php echo $hs_background_image['url']; ?>');">
 			<div class="overlay"></div>
@@ -17,7 +17,7 @@
 		<!-- /Background Image -->
 
 		<!-- Nav -->
-		<nav id="nav" class="navbar nav-transparent">
+		<nav id="nav" class="navbar <?php echo !is_single() ? 'nav-transparent' : ''; ?> ">
 			<div class="container">
 
 				<div class="navbar-header">
@@ -53,6 +53,7 @@
 		</nav>
 		<!-- /Nav -->
 
+		<?php if (!is_single()): ?>
 		<!-- home wrapper -->
 		<div class="home-wrapper">
 			<div class="container">
@@ -72,7 +73,24 @@
 				</div>
 			</div>
 		</div>
-		<!-- /home wrapper -->
+		<!-- home wrapper -->
+		<?php endif; ?>
+
+		<?php if (is_single()): ?>
+		<!-- header wrapper -->
+		<div class="header-wrapper sm-padding bg-grey">
+			<div class="container">
+				<h2>Blog Page</h2>
+				<ul class="breadcrumb">
+					<li class="breadcrumb-item"><a href="<?php echo get_home_url(); ?>">Home</a></li>
+					<li class="breadcrumb-item"><a href="<?php echo get_home_url(); ?>#blog">Blog</a></li>
+					<li class="breadcrumb-item active">Single Post</li>
+				</ul>
+			</div>
+		</div>
+		<!-- /header wrapper -->
+
+		<?php endif; ?>
 
 	</header>
 	<!-- /Header -->

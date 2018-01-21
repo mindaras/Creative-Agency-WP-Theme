@@ -351,3 +351,9 @@ object {
 .gallery-caption {
 	display: block;
 }
+
+.recent-thumbnail
+{
+	width: 85px;
+	height: 60px;
+}

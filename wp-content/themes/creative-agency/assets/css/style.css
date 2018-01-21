@@ -1751,3 +1751,10 @@ header {
             transform:scale(0);
   }
 }
+
+.fa.fa-search
+{
+  position: absolute;
+  top: 15px;
+  left: 10px;
+}

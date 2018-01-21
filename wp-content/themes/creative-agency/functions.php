@@ -93,9 +93,35 @@ if ( ! function_exists( 'creative_agency_setup' ) ) :
 
 		add_filter('wpcf7_form_elements', function($content) {
 		    $content = preg_replace('/<(span).*?class="\s*(?:.*\s)?wpcf7-form-control-wrap(?:\s[^"]+)?\s*"[^\>]*>(.*)<\/\1>/i', '\2', $content);
-
 		    return $content;
 		});
+
+		function my_new_contactmethods( $contactmethods ) {
+			// Add Facebook
+			$contactmethods['facebook'] = 'Facebook';
+			// Add Twitter
+			$contactmethods['twitter'] = 'Twitter';
+			// Add Linkedin
+			$contactmethods['linkedin'] = 'Linkedin';
+			// Add Instagram
+			$contactmethods['instagram'] = 'Instagram';
+			return $contactmethods;
+		}
+		add_filter('user_contactmethods','my_new_contactmethods',10,1);
+
+		function my_search_form( $form ) {
+			$form = '<form role="search" method="get" id="searchform" class="searchform" action="' . home_url( '/' ) . '" >
+			 <div class="widget-search"><label class="screen-reader-text" for="s">' . __( 'Search for:' ) . '</label>
+			 <input type="text" value="' . get_search_query() . '" name="s" id="s" placeholder="search"/>
+			 <label for="searchsubmit" class="search-btn"><i class="fa fa-search"></i></label>
+			 <input type="submit" id="searchsubmit" value="'. esc_attr__( 'Search' ) .'" hidden />
+			 </div>
+			 </form>';
+
+		    return $form;
+		}
+
+		add_filter( 'get_search_form', 'my_search_form', 100 );
 	}
 endif;
 add_action( 'after_setup_theme', 'creative_agency_setup' );
